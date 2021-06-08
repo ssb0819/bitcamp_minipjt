@@ -122,8 +122,7 @@
 			<table border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td height="26">
-						${ product.fileName }
-						<img src="/resources/upload/${product.prodNo}/${product.fileName}">
+						${product.fileName.substring(10)}
 					</td>
 				</tr>
 			</table>
@@ -137,7 +136,7 @@
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
 			<c:forEach var="uploadFile" items="${fileList}" >
-				&{uploadFile.originFileName}
+				${uploadFile.originFileName}
 				<br/>
 			</c:forEach>
 		</td>

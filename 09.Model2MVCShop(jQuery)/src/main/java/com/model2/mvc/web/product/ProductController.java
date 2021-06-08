@@ -102,7 +102,8 @@ public class ProductController {
         if(!folder.exists()) {
              folder.mkdirs();
         }
-         
+        file.transferTo(new File(folder, product.getFileName())) ;
+        
         List<UploadFile> fileList = new ArrayList<UploadFile>();
          
         for (MultipartFile tmpfile : files) {
@@ -122,7 +123,7 @@ public class ProductController {
         productService.addFile(fileList);
         System.out.println("/addProduct : POST ¿Ï·á");
         
-        model.addAttribute("fileLIst", fileList);
+        model.addAttribute("fileList", fileList);
         model.addAttribute("product", product);
 		
 		return "forward:/product/addProduct.jsp";
