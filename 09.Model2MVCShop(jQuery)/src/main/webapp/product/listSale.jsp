@@ -85,7 +85,7 @@ function fncGetList(currentPage){
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
 	<tr>
-		<td colspan="11" >전체 ${resultPage.totalCount} 건수, 현재 ${resultPage.currentPage} 페이지</td>
+		<td colspan="17" >전체 ${resultPage.totalCount} 건수, 현재 ${resultPage.currentPage} 페이지</td>
 	</tr>
 	<tr>
 		<td class="ct_list_b" width="100">No</td>
@@ -105,7 +105,7 @@ function fncGetList(currentPage){
 		<td class="ct_list_b">배송요청일</td>	
 	</tr>
 	<tr>
-		<td colspan="11" bgcolor="808285" height="1"></td>
+		<td colspan="17" bgcolor="808285" height="1"></td>
 	</tr>	
 	<c:set var="i" value="0" />
 	<c:forEach var="purchase" items="${list}" >
@@ -155,13 +155,13 @@ function fncGetList(currentPage){
 			<td></td>
 			<td align="left">${purchase.orderDate}</td>
 			<td></td>
-			<td align="left">${purchase.divyDate}</td>			
+			<td align="left">${purchase.divyDate.substring(0,9)}</td>			
+		</tr>
+		<tr>
+			<td colspan="17" bgcolor="D6D7D6" height="1"></td>
 		</tr>
 	</c:forEach>
-	<tr>
-		<td colspan="15" bgcolor="D6D7D6" height="1"></td>
-	</tr>	
-	
+		
 </table>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">

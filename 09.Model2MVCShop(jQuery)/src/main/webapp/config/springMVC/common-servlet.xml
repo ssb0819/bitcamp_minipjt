@@ -74,6 +74,7 @@
 	<mvc:resources mapping="/css/**" location="/css/" />
    	<mvc:resources mapping="/images/**" location="/images/" />
    	<mvc:resources mapping="/javascript/**" location="/javascript/" />
+   	<mvc:resources mapping="/resources/**" location="/resources/" />
    	
 
 	<!-- 	:: exception resolver  선언 :: 서술적 / 선언적 예외처리 

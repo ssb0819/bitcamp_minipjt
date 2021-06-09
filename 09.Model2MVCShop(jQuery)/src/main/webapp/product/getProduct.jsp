@@ -76,9 +76,19 @@ Product product = (Product)request.getAttribute("product");
 			상품이미지
 		</td>
 		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			${ product.fileName }<img src = "/images/uploadFiles/../../images/empty.GIF"/>
+		<td class="ct_write01">					 
+			<table>
+				<c:forEach var="uploadFile" items="${uploadFiles}">
+				<tr>
+					<td>							
+						<img src = "/resources/upload/${uploadFile.prodNo}/${uploadFile.saveFileName}" height="auto" width="200" />		
+						<br/>
+					</td>
+				</tr>
+				</c:forEach>
+			</table>						
 		</td>
+		
 	</tr>
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>

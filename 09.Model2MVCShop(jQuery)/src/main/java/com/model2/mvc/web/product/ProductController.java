@@ -60,7 +60,7 @@ public class ProductController {
 	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
-	/*
+	/* file upload 전
 	@RequestMapping(value="/addProduct", method=RequestMethod.POST)
 	public String addProduct( @ModelAttribute("product") Product product, UploadFile uploadfile ,Model model ) throws Exception {
 
@@ -87,12 +87,15 @@ public class ProductController {
 		
 		String tempManuDate = product.getManuDate().replaceAll("-", "");
 		product.setManuDate(tempManuDate);
-		product.setFileName("thumbnail_"+file.getOriginalFilename());
+		
+		if(file!=null) {
+			product.setFileName("thumbnail_"+file.getOriginalFilename());
+		}
 		int prodNo = productService.addProduct(product);
-		System.out.println("addProduct 완료 prodNo : "+prodNo);
+		System.out.println("addProduct() 완료 prodNo : "+prodNo);
 				
 		//String realPath = servletContext.getRealPath("/resources/upload");
-		String realPath = "C:\\Users\\USER\\git\\09project\\09.Model2MVCShop(jQuery)\\src\\main\\webapp\\resources\\upload";
+		String realPath = "C:\\Users\\aiacademy\\git\\09project\\09.Model2MVCShop(jQuery)\\src\\main\\webapp\\resources\\upload";
         String saveFolder = realPath + File.separator + prodNo;
         System.out.println("saveFolder : "+saveFolder);
         
@@ -105,23 +108,25 @@ public class ProductController {
         file.transferTo(new File(folder, product.getFileName())) ;
         
         List<UploadFile> fileList = new ArrayList<UploadFile>();
-         
-        for (MultipartFile tmpfile : files) {
-        	uploadFile = new UploadFile();
-        	uploadFile.setProdNo(prodNo);
-            String originalFileName = tmpfile.getOriginalFilename();
-            if (!originalFileName.isEmpty()) {
-                String saveFileName = UUID.randomUUID().toString() + originalFileName.substring(originalFileName.lastIndexOf('.'));
-                uploadFile.setOriginFileName(originalFileName);
-                uploadFile.setSaveFileName(saveFileName);
-                System.out.println(tmpfile.getOriginalFilename() + "   " + saveFileName);
-                tmpfile.transferTo(new File(folder, saveFileName));
-             }
-            System.out.println("uploadFile 세팅완료 : "+uploadFile);
-            fileList.add(uploadFile);
-         }
-        productService.addFile(fileList);
-        System.out.println("/addProduct : POST 완료");
+        
+        if(files!=null) {
+	        for (MultipartFile tmpfile : files) {
+	        	uploadFile = new UploadFile();
+	        	uploadFile.setProdNo(prodNo);
+	            String originalFileName = tmpfile.getOriginalFilename();
+	            if (!originalFileName.isEmpty()) {
+	                String saveFileName = UUID.randomUUID().toString() + originalFileName.substring(originalFileName.lastIndexOf('.'));
+	                uploadFile.setOriginFileName(originalFileName);
+	                uploadFile.setSaveFileName(saveFileName);
+	                System.out.println(tmpfile.getOriginalFilename() + "   " + saveFileName);
+	                tmpfile.transferTo(new File(folder, saveFileName));
+	             }
+	            System.out.println("uploadFile 세팅완료 : "+uploadFile);
+	            fileList.add(uploadFile);
+	        }
+	        productService.addFile(fileList);
+	        System.out.println("addFile() 완료");
+        }
         
         model.addAttribute("fileList", fileList);
         model.addAttribute("product", product);
@@ -134,10 +139,10 @@ public class ProductController {
 	public String getProduct( @RequestParam("prodNo") int prodNo , Model model, HttpServletResponse response ) throws Exception {
 		
 		System.out.println("/getProduct");
-		//Business Logic
-		Product product = productService.getProduct(prodNo);
-		// Model 과 View 연결
-		model.addAttribute("product", product);
+		Map<String, Object> map = productService.getProduct(prodNo);
+		
+		model.addAttribute("product", ((Product)map.get("product")));
+		model.addAttribute("uploadFiles", map.get("uploadFiles"));
 		
 		/*Spring 사용하면서 변경
 		Cookie cookie = new Cookie("history"+prodNo, URLEncoder.encode(product.getProdName()));
@@ -148,7 +153,7 @@ public class ProductController {
 		
 		CookieGenerator cookie = new CookieGenerator();
 	    cookie.setCookieName("history"+prodNo);
-	    cookie.addCookie(response, URLEncoder.encode(product.getProdName()));
+	    cookie.addCookie(response, URLEncoder.encode(((Product)map.get("product")).getProdName()));
 	    cookie.setCookieMaxAge(-1);
 	    System.out.println("history=prodNo 쿠키 저장완료 : "+cookie);
 				
@@ -160,9 +165,10 @@ public class ProductController {
 
 		System.out.println("/updateProduct : GET");
 		//Business Logic
-		Product product = productService.getProduct(prodNo);
-		// Model 과 View 연결
-		model.addAttribute("product", product);
+		Map<String, Object> map = productService.getProduct(prodNo);
+		
+		model.addAttribute("product", ((Product)map.get("product")));
+		model.addAttribute("uploadFiles", map.get(map.get("uploadFiles")));
 		model.addAttribute("currentPage", currentPage);
 		
 		return "forward:/product/updateProductView.jsp";

@@ -64,12 +64,12 @@ public class ProductServiceTest {
 	//@Test
 	public void testGetProduct() throws Exception{
 		
-		Product product = productService.getProduct(10013);
+		//Product product = productService.getProduct(10013);
 		
-		Assert.assertEquals("apple", product.getProdName());
-		Assert.assertEquals("사과", product.getProdDetail());
-		Assert.assertEquals(50000, product.getPrice());
-		Assert.assertEquals("2021-04-13", product.getRegDate()+"");
+		//Assert.assertEquals("apple", product.getProdName());
+		//Assert.assertEquals("사과", product.getProdDetail());
+		//Assert.assertEquals(50000, product.getPrice());
+		//Assert.assertEquals("2021-04-13", product.getRegDate()+"");
 		
 		Assert.assertNotNull(productService.getProduct(10000));
 		Assert.assertNotNull(productService.getProduct(10001));		
@@ -78,13 +78,13 @@ public class ProductServiceTest {
 	//@Test
 	public void testUpdateProduct() throws Exception{
 		
-		Product product = productService.getProduct(10080);		
-		product.setProdName("updateproduct");
-		product.setProdDetail("update");
+		//Product product = productService.getProduct(10080);		
+		//product.setProdName("updateproduct");
+		//product.setProdDetail("update");
 		
-		productService.updateProduct(product);
-		product = productService.getProduct(10080);
-		System.out.println(product);
+		//productService.updateProduct(product);
+		//product = productService.getProduct(10080);
+		//System.out.println(product);
 	}
 	
 	//@Test

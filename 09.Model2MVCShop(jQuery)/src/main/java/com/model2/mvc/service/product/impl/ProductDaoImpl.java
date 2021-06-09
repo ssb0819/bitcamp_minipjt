@@ -1,6 +1,7 @@
 package com.model2.mvc.service.product.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public Product findProduct(int prodNo) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("ProductMapper.findProduct", prodNo);
+		return sqlSession.selectOne("ProductMapper.findProduct", prodNo);		
 	}
 
 	@Override
@@ -71,6 +72,12 @@ public class ProductDaoImpl implements ProductDao {
 		for(UploadFile uploadFile : fileList) {
 			sqlSession.insert("ProductMapper.insertFile", uploadFile);
 		}
+	}
+
+	@Override
+	public List<UploadFile> findUploadFile(int prodNo) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ProductMapper.findUploadFile", prodNo);
 	}
 
 }

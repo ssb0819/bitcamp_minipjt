@@ -42,10 +42,11 @@ $(function(){
 	$(".ct_btn01:contains('검색')").on('click',function(){		
 		fncGetList('1');		
 	})
-	
+	/*
 	$("#prodName").on('click',function(){		
 		self.location = "/product/getProduct?prodNo=${product.prodNo}&menu=search&currentPage=${search.currentPage}"
 	})	
+	*/
 	
 });
 
@@ -148,7 +149,8 @@ $(function(){
 			<td align="left" id="prodName">
 				<c:choose>
 					<c:when test="${ empty product.proTranCode || product.proTranCode == '판매중' }">
-							${ product.prodName }
+							<a href="/product/getProduct?prodNo=${product.prodNo}&menu=search&currentPage=${search.currentPage}">
+							${ product.prodName }</a>
 					</c:when>
 					<c:otherwise>	
 							${ product.prodName }
@@ -162,10 +164,11 @@ $(function(){
 			<td></td>
 			<td align="center">${product.proTranCode}</td>
 		</tr>
+		<tr>
+			<td colspan="11" bgcolor="D6D7D6" height="1"></td>
+		</tr>	
 	</c:forEach>
-	<tr>
-		<td colspan="11" bgcolor="D6D7D6" height="1"></td>
-	</tr>	
+	
 	
 </table>
 

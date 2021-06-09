@@ -27,7 +27,7 @@
 	<insert id="insertProduct" parameterType="product">
 		INSERT
 		INTO product(prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date)
-		VALUES(seq_product_prod_no.NEXTVAL,#{prodName},#{prodDetail},#{manuDate},#{price},#{fileName},SYSDATE)	
+		VALUES(seq_product_prod_no.NEXTVAL,#{prodName:VARCHAR},#{prodDetail:VARCHAR},#{manuDate:VARCHAR},#{price:NUMERIC},#{fileName:VARCHAR},SYSDATE)	
 	</insert>
 	
 	<select id="findProdNo" resultType="_int">
@@ -107,11 +107,17 @@
 		VALUES ( #{prodNo}, #{originFileName}, #{saveFileName} )
 	</insert>
 	
-	<select id="findFile" parameterType="_int" resultMap="uploadFileSelectMap">
+	<select id="findUploadFile" parameterType="_int" resultMap="uploadFileSelectMap">
 		SELECT 
 		prod_no, origin_filename, save_filename
 		FROM files
 		WHERE prod_no = #{value}
 	</select>
+	
+	<delete id="deleteFile" parameterType="_int">
+		DELETE
+		FROM files
+		WHERE prod_no = #{value}
+	</delete>
 
 </mapper>

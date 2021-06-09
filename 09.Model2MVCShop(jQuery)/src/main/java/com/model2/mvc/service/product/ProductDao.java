@@ -21,5 +21,7 @@ public interface ProductDao {
 	public int getTotalCount(Search search) throws Exception;
 	
 	public void insertFile(List<UploadFile> fileList) throws Exception;
+	
+	public List<UploadFile> findUploadFile(int prodNo) throws Exception;
 
 }

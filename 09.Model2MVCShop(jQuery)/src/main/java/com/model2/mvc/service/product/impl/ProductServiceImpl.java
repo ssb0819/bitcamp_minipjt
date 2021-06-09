@@ -37,9 +37,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product getProduct(int prodNo) throws Exception {
+	public Map<String, Object> getProduct(int prodNo) throws Exception {
 		// TODO Auto-generated method stub
-		return productDao.findProduct(prodNo);	
+		List<UploadFile> list = productDao.findUploadFile(prodNo);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("product", productDao.findProduct(prodNo));
+		map.put("uploadFiles", list);		
+		
+		return map;
 	}
 
 	@Override
