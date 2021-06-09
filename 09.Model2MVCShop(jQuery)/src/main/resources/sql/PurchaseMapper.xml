@@ -60,12 +60,14 @@
 						p.prod_no, prod_name, p.price, reg_date, tran_no, tran_status_code, order_date, dlvy_date
 						FROM product p, transaction t
 						<where> 
-							p.prod_no = t.prod_no(+) 
-							<if test="searchCondition==0">
-								AND p.prod_no LIKE '%'||#{searchKeyword}||'%'
-							</if>
-							<if test="searchCondition==1">
-								AND p.prod_name LIKE '%'||#{searchKeyword}||'%'
+							p.prod_no = t.prod_no(+)
+							<if test="searchCondition != null"> 
+								<if test="searchCondition==0 and searchKeyword !='' ">
+									AND p.prod_no LIKE '%'||#{searchKeyword}||'%'
+								</if>
+								<if test="searchCondition==1 and searchKeyword !='' ">
+									AND p.prod_name LIKE '%'||#{searchKeyword}||'%'
+								</if>
 							</if>
 						</where>
 						ORDER BY t.tran_no DESC NULLS LAST ) inner_table

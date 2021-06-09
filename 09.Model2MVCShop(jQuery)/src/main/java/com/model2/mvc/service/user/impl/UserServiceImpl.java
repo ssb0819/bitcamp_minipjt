@@ -63,4 +63,8 @@ public class UserServiceImpl implements UserService{
 		}
 		return result;
 	}
+	
+	public void deleteUser(String userId) throws Exception{	
+		userDao.deleteUser(userId);
+	}
 }

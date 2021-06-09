@@ -207,4 +207,15 @@ public class UserController {
 		
 		return "forward:/user/listUser.jsp";
 	}
+	
+	@RequestMapping(value="deleteUser")
+	public String deleteUser(HttpSession session) throws Exception {
+		
+		System.out.println("/user/deleteUser Ω√¿€");
+			
+		userService.deleteUser(((User)session.getAttribute("user")).getUserId());		
+		session.invalidate();		
+		
+		return "redirect:/user/deleteUserView.jsp";
+	}
 }

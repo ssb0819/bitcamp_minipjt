@@ -1,6 +1,7 @@
 package com.model2.mvc.web.purchase;
 
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,7 +76,7 @@ public class PurchaseController {
 		
 		// Business logic ผ๖วเ
 		Map<String , Object> map=purchaseService.getSaleList(search);
-		
+	
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 		

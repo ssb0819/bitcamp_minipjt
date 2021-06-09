@@ -54,11 +54,11 @@ public class Search {
 	
 	//==> Select Query 시 ROWNUM 마지막 값 
 	public int getEndRowNum() {
-		return getCurrentPage()*getPageSize();
+		return (getCurrentPage()*getPageSize());
 	}
 	//==> Select Query 시 ROWNUM 시작 값
 	public int getStartRowNum() {
-		return (getCurrentPage()-1)*getPageSize()+1;
+		return ((getCurrentPage()-1)*getPageSize()+1);
 	}
 	
 	public String getSearchPriceMin() {
@@ -81,8 +81,8 @@ public class Search {
 	public String toString() {
 		return "Search [currentPage=" + currentPage + ", searchCondition="
 				+ searchCondition + ", searchKeyword=" + searchKeyword
-				+ ", pageSize=" + pageSize + ", endRowNum=" + endRowNum
-				+ ", startRowNum=" + startRowNum + ", searchPriceMin=" 
-				+ searchPriceMin + ", searchPriceMax"+ searchPriceMax +"]";
+				+ ", pageSize=" + pageSize + ", endRowNum=" + getEndRowNum()
+				+ ", startRowNum=" + getStartRowNum() + ", searchPriceMin=" 
+				+ searchPriceMin + ", searchPriceMax="+ searchPriceMax +"]";
 	}
 }

@@ -55,6 +55,7 @@
 											FROM users
 											<if test="searchCondition != null">
 												<where>
+														role != 'deleted'
 													<if test="searchCondition == 0 and searchKeyword !='' ">
 										 				user_id = #{searchKeyword}
 													</if>
@@ -94,5 +95,18 @@
 							</where>
 						</if> ) countTable						
 	 </select>
+	 
+	 <update	id="deleteUser" 	parameterType="user" >
+	   	UPDATE users
+		<set> 
+		role='deleted', 
+		ssn=NULL, 
+		cell_phone=NULL, 
+		addr=NULL, 
+		email=NULL, 
+		del_date=SYSDATE		
+		</set>
+		WHERE user_id=#{userId}
+	 </update>
 	 
 </mapper>
